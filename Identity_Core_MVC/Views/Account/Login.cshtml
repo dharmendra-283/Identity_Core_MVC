@@ -1,0 +1,49 @@
+﻿@model Identity_Core_MVC.ViewModels.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-3 card p-3">
+        <h2 class="text-center text-info">Login</h2>
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div class="mb-1">
+                @Html.DisplayNameFor(model => model.UserName)
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-1">
+                <div class="col-6 float-start">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+                <div class="col-6 float-end">
+                    <a asp-action="ForgotPassword" class="text-decoration-none">Forgot Password?</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <a asp-action="Register" class="float-start text-decoration-none">Create Account</a>
+                </div>
+                <div class="col-4">
+                    <input type="submit" value="Login" class="btn btn-primary btn-sm float-end" />
+                </div>
+            </div>
+        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,30 @@
+﻿@model Identity_Core_MVC.ViewModels.RoleModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-3 card p-3">
+        <h2 class="text-center text-info">Create Role</h2>
+        <form asp-action="CreateRole" asp-controller="Account" method="post">
+            <div class="mb-1">
+                @Html.DisplayNameFor(model => model.RoleName)
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" value="Add Role" class="btn btn-primary btn-sm float-end" />
+                </div>
+            </div>
+        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+</div>
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

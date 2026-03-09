@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model Identity_Core_MVC.ViewModels.RoleModel
+
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-4 card p-3">
+        <h2 class="text-center">Edit Role</h2>
+        <form asp-action="EditRole" asp-controller="Account" method="post">
+            <div class="mb-1">
+                <span class="form-control">@Model.Id</span>
+            </div>
+            <div class="mb-1">
+                @Html.DisplayNameFor(model => model.RoleName)
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input asp-action="EditRole" type="submit" value="Update" class="btn btn-primary btn-sm " />
+                    <input asp-action="AllRoles" type="submit" value="Cancel" class="btn btn-secondary btn-sm" />
+                </div>
+            </div>
+        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <hr />
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2 class="text-center">Users in this role</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.Users.Any())
+                {
+                    foreach (User user in Model.Users)
+                    {
+                        <h6 class="card-title">
+                            @user.UserName
+                        </h6>
+                    }
+                }
+                else
+                {
+                    <h6 class="card-title">
+                        No users
+                    </h6>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="EditUserInRole" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Add or remove users</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
